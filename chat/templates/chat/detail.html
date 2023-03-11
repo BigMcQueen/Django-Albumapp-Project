@@ -4,7 +4,9 @@
 
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    <a href="{% url 'list' %}" class="text-decoration-none">
+      <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    </a>
   </div>
 </nav>
 
@@ -19,7 +21,7 @@
     {% if object.picture %}
     <p><img src="{{ object.picture.url }}" width="200" alt=""></p>
     {% endif %}
-    <a href="#" class="btn btn-primary" role="button" aria-disabled="true">いいね！する</a>
+    <a href="{% url 'good' object.pk %}" class="btn btn-primary" role="button" aria-disabled="true">いいね！する</a>
   </div>
 </div>
 {% endblock content %}

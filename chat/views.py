@@ -4,6 +4,9 @@ from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
 from .models import Chat
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 def signup_func(request):
@@ -16,7 +19,7 @@ def signup_func(request):
         except IntegrityError:
             return render(request, 'chat/signup.html', {'context': 'このユーザー名はすでに登録されています！'})
     else:
-        return render(request, 'chat/signup.html', {'context': 'GET method'})
+        return render(request, 'chat/signup.html')
     
 def signin_func(request):
     if request.method == 'POST':
@@ -29,7 +32,7 @@ def signin_func(request):
         else:
             return render(request, 'chat/signin.html', {'context': 'サインインできませんでした'})
     else:
-        return render(request, 'chat/signin.html', {'context': 'GET method'})
+        return render(request, 'chat/signin.html')
 
 @login_required
 def listview_func(request):
@@ -45,3 +48,16 @@ def signout_func(request):
 def detail_func(request, pk):
     object = get_object_or_404(Chat, pk=pk)
     return render(request, 'chat/detail.html', {'object': object})
+
+@login_required
+def good_func(request, pk):
+    object = get_object_or_404(Chat, pk=pk)
+    object.good += 1
+    object.save()
+    return redirect('list')
+
+class ChatCreate(CreateView):
+    template_name = 'chat/create.html'
+    model = Chat
+    fields = ('message', 'poster', 'picture')
+    success_url = reverse_lazy('list')
