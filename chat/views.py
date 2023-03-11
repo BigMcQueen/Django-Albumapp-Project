@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login
+from .models import Chat
 
 # Create your views here.
-def signup(request):
+def signup_func(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -16,7 +17,7 @@ def signup(request):
     else:
         return render(request, 'chat/signup.html', {'context': 'GET method'})
     
-def signin(request):
+def signin_func(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -28,3 +29,7 @@ def signin(request):
             return render(request, 'chat/signin.html', {'context': 'サインインできませんでした'})
     else:
         return render(request, 'chat/signin.html', {'context': 'GET method'})
+    
+def listview_func(request):
+    object_list = Chat.objects.all()
+    return render(request, 'chat/listview.html', {'object_list': object_list})

@@ -1,0 +1,24 @@
+{% extends 'chat/base.html' %}
+
+{% block header %}
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+  </div>
+</nav>
+
+{% endblock header %}
+
+{% block content %}
+
+<div class="container">
+  {% for item in object_list %}
+  <div class="alert alert-light" role="alert">
+    <p>{{ item.message }}</p>
+    <a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">いいね！</a>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
