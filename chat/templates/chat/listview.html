@@ -4,8 +4,10 @@
 
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">djangoChatapp</span>
-    <a href="{% url 'signout' %}">サインアウト</a>
+    <a href="{% url 'list' %}" class="text-decoration-none">
+      <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    </a>
+    <a href="{% url 'signout' %}" class="btn btn-outline-dark">サインアウト</a>
   </div>
 </nav>
 
@@ -14,12 +16,14 @@
 {% block content %}
 
 <div class="container">
+  <h5 class="m-3"><a href="{% url 'create' %}">Create a Message</a></h5>
   {% for item in object_list %}
   <div class="alert alert-light" role="alert">
+    <p>{{ user.username }}</p>
     <p><a href="{% url 'detail' item.pk %}">{{ item.message }}</a></p>
-    <a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">
-      いいね！{{ item.good }}件
-    </a>
+    <p><a href="#" class="btn btn-outline-primary disabled" role="button" aria-disabled="true">
+        👍 {{ item.good }}件
+      </a></p>
   </div>
   {% endfor %}
 </div>
