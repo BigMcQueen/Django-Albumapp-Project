@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import Chat
 from django.contrib.auth.decorators import login_required
 
@@ -35,3 +35,8 @@ def signin_func(request):
 def listview_func(request):
     object_list = Chat.objects.all()
     return render(request, 'chat/listview.html', {'object_list': object_list})
+
+@login_required
+def signout_func(request):
+    logout(request)
+    return redirect('signin')
