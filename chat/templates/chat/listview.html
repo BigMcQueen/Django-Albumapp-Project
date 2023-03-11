@@ -5,6 +5,7 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    <a href="{% url 'signout' %}">サインアウト</a>
   </div>
 </nav>
 
@@ -15,7 +16,7 @@
 <div class="container">
   {% for item in object_list %}
   <div class="alert alert-light" role="alert">
-    <p>{{ item.message }}</p>
+    <p><a href="{% url 'detail' item.pk %}">{{ item.message }}</a></p>
     <a href="#" class="btn btn-primary disabled" role="button" aria-disabled="true">いいね！</a>
   </div>
   {% endfor %}
