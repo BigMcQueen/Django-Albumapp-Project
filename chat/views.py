@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login, logout
@@ -40,3 +40,8 @@ def listview_func(request):
 def signout_func(request):
     logout(request)
     return redirect('signin')
+
+@login_required
+def detail_func(request, pk):
+    object = get_object_or_404(Chat, pk=pk)
+    return render(request, 'chat/detail.html', {'object': object})

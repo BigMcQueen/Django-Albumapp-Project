@@ -1,0 +1,25 @@
+{% extends 'chat/base.html' %}
+
+{% block header %}
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+  </div>
+</nav>
+
+{% endblock header %}
+
+{% block content %}
+
+<div class="container">
+  <div class="alert alert-light mt-3" role="alert">
+    <p>{{ object.message }}</p>
+    <!-- ImageFieldに画像があるかチェック -->
+    {% if object.picture %}
+    <p><img src="{{ object.picture.url }}" width="200" alt=""></p>
+    {% endif %}
+    <a href="#" class="btn btn-primary" role="button" aria-disabled="true">いいね！する</a>
+  </div>
+</div>
+{% endblock content %}
