@@ -45,3 +45,10 @@ def signout_func(request):
 def detail_func(request, pk):
     object = get_object_or_404(Chat, pk=pk)
     return render(request, 'chat/detail.html', {'object': object})
+
+@login_required
+def good_func(request, pk):
+    object = get_object_or_404(Chat, pk=pk)
+    object.good += 1
+    object.save()
+    return redirect('list')

@@ -19,7 +19,7 @@
     {% if object.picture %}
     <p><img src="{{ object.picture.url }}" width="200" alt=""></p>
     {% endif %}
-    <a href="#" class="btn btn-primary" role="button" aria-disabled="true">いいね！する</a>
+    <a href="{% url 'good' object.pk %}" class="btn btn-primary" role="button" aria-disabled="true">いいね！する</a>
   </div>
 </div>
 {% endblock content %}
