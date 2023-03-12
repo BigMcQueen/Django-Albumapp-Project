@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Chat
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DeleteView
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -76,5 +76,10 @@ class ChatCreate(LoginRequiredMixin, CreateView):
     template_name = 'chat/create.html'
     model = Chat
     fields = ('message', 'poster', 'picture')
+    success_url = reverse_lazy('list')
+    redirect_field_name = 'redirect_to'
+
+class ChatDelete(LoginRequiredMixin, DeleteView):
+    model = Chat
     success_url = reverse_lazy('list')
     redirect_field_name = 'redirect_to'
