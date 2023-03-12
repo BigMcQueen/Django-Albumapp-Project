@@ -1,37 +1,22 @@
 {% extends 'chat/base.html' %}
 
-{% block header %}
-
-<nav class="navbar navbar-light bg-light">
-  <div class="container-fluid">
-    <a href="{% url 'list' %}" class="text-decoration-none">
-      <span class="navbar-brand mb-0 h1">djangoChatapp</span>
-    </a>
-    <div class="d-flex">
-      <a href="#" class="btn btn-link link-dark text-decoration-none disabled">{{ user.username }}</a>
-      <a href="{% url 'signout' %}" class="btn btn-outline-dark">サインアウト</a>
-    </div>
-  </div>
-</nav>
-
-{% endblock header %}
-
 {% block content %}
 
 <div class="container">
-  <h4 class="m-3"><a href="{% url 'create' %}">Create a Message</a></h4>
-  {% for item in object_list %}
-  <div class="alert alert-light" role="alert">
-    <div class="d-flex">
-      <h5 class="me-3"><strong>{{ item.poster }}</strong></h5>
-      <p>{{ item.created_at }}</p>
+  <div class="mt-5">
+    {% for item in object_list %}
+    <div class="alert alert-light" role="alert">
+      <div class="d-flex">
+        <h5 class="me-3"><strong>{{ item.poster }}</strong></h5>
+        <p>{{ item.created_at }}</p>
+      </div>
+      <p><a href="{% url 'detail' item.pk %}" class="link-dark text-decoration-none">{{ item.message }}</a></p>
+      <p><a href="#" class="btn btn-outline-primary disabled" role="button" aria-disabled="true">
+          👍 {{ item.good }}件
+        </a></p>
     </div>
-    <p><a href="{% url 'detail' item.pk %}">{{ item.message }}</a></p>
-    <p><a href="#" class="btn btn-outline-primary disabled" role="button" aria-disabled="true">
-        👍 {{ item.good }}件
-      </a></p>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 
 {% endblock content %}
