@@ -10,37 +10,46 @@ from django.urls import reverse_lazy
 
 # Create your views here.
 def top_func(request):
-    return render(request, 'chat/top.html')
+    if request.user.is_authenticated:
+        return redirect('list')
+    else:
+        return render(request, 'chat/top.html')
 
 def signup_func(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        if len(password) < 8:
-            return render(request, 'chat/signup.html', {'context': 'パスワードは８文字以上で入力してください'})
-        else:
-            try:
-                user = User.objects.create_user(username, '', password)
-                user = authenticate(request, username=username, password=password)
-                login(request, user)
-                return redirect('list')
-            except IntegrityError:
-                return render(request, 'chat/signup.html', {'context': 'このユーザー名はすでに登録されています'})
+    if request.user.is_authenticated:
+        return redirect('list')
     else:
-        return render(request, 'chat/signup.html')
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            if len(password) < 8:
+                return render(request, 'chat/signup.html', {'context': 'パスワードは８文字以上で入力してください'})
+            else:
+                try:
+                    user = User.objects.create_user(username, '', password)
+                    user = authenticate(request, username=username, password=password)
+                    login(request, user)
+                    return redirect('list')
+                except IntegrityError:
+                    return render(request, 'chat/signup.html', {'context': 'このユーザー名はすでに登録されています'})
+        else:
+            return render(request, 'chat/signup.html')
     
 def signin_func(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('list')
-        else:
-            return render(request, 'chat/signin.html', {'context': 'サインインできませんでした'})
+    if request.user.is_authenticated:
+        return redirect('list')
     else:
-        return render(request, 'chat/signin.html')
+        if request.method == 'POST':
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('list')
+            else:
+                return render(request, 'chat/signin.html', {'context': 'サインインできませんでした'})
+        else:
+            return render(request, 'chat/signin.html')
 
 @login_required(login_url='/signin/')
 def listview_func(request):
