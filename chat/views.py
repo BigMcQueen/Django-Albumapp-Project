@@ -44,7 +44,7 @@ def signin_func(request):
 
 @login_required(login_url='/signin/')
 def listview_func(request):
-    object_list = Chat.objects.all()
+    object_list = Chat.objects.all().order_by('created_at').reverse()
     return render(request, 'chat/listview.html', {'object_list': object_list})
 
 def signout_func(request):
