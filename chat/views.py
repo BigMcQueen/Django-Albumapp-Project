@@ -56,8 +56,9 @@ def good_func(request, pk):
     object.save()
     return redirect('list')
 
-class ChatCreate(CreateView):
+class ChatCreate(LoginRequiredMixin, CreateView):
     template_name = 'chat/create.html'
     model = Chat
     fields = ('message', 'poster', 'picture')
     success_url = reverse_lazy('list')
+    redirect_field_name = 'redirect_to'
