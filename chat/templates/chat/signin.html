@@ -4,7 +4,9 @@
 
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    <a href="{% url 'top' %}" class="text-decoration-none">
+      <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    </a>
     <div class="d-flex">
       <a href="{% url 'signup' %}" class="btn btn-outline-dark">サインアップ</a>
     </div>

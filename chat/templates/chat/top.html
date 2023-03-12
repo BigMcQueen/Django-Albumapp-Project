@@ -1,0 +1,33 @@
+{% extends 'chat/base.html' %}
+
+{% block header %}
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <a href="{% url 'top' %}" class="text-decoration-none">
+      <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    </a>
+    <div class="d-flex">
+      <a href="{% url 'signup' %}" class="btn btn-link link-dark text-decoration-none">サインアップ</a>
+      <a href="{% url 'signin' %}" class="btn btn-outline-dark">サインイン</a>
+    </div>
+    </a>
+  </div>
+</nav>
+
+{% endblock header %}
+
+{% block content %}
+
+<div class="container">
+  <main role="main" class="inner cover mt-5">
+    <h1 class="cover-heading">ようこそ、djangoChatappへ</h1>
+    <p class="lead mt-5">Djangoは、Pythonで実装されたWebアプリケーションフレームワークです。</p>
+    <p class="lead">djangoChatappはDjangoでつくられたシンプルなチャットアプリです。</p>
+    <p class="lead mt-5">
+      <a href="https://github.com/BigMcQueen" class="btn btn-lg btn-secondary">開発者のGitHub</a>
+    </p>
+  </main>
+</div>
+
+{% endblock content %}

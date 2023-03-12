@@ -1,7 +1,8 @@
 from django.urls import path
-from .views import signup_func, signin_func, listview_func, signout_func, detail_func, good_func, ChatCreate
+from .views import top_func, signup_func, signin_func, listview_func, signout_func, detail_func, good_func, ChatCreate
 
 urlpatterns = [
+    path('', top_func, name='top'),
     path('signup/', signup_func, name='signup'),
     path('signin/', signin_func, name='signin'),
     path('list/', listview_func, name='list'),

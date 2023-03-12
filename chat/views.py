@@ -9,6 +9,9 @@ from django.views.generic import CreateView
 from django.urls import reverse_lazy
 
 # Create your views here.
+def top_func(request):
+    return render(request, 'chat/top.html')
+
 def signup_func(request):
     if request.method == 'POST':
         username = request.POST['username']
