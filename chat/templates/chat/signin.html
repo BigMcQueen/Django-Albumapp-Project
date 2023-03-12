@@ -4,7 +4,9 @@
 
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    <a href="{% url 'top' %}" class="text-decoration-none">
+      <span class="navbar-brand mb-0 h1">djangoChatapp</span>
+    </a>
     <div class="d-flex">
       <a href="{% url 'signup' %}" class="btn btn-outline-dark">サインアップ</a>
     </div>
@@ -20,7 +22,7 @@
     <main class="form-signin">
       <form method="POST">{% csrf_token %}
         <h1 class="h3 mt-5 mb-3 fw-normal">Please sign in</h1>
-        {{ context }}
+        <p class="m-3">{{ context }}</p>
         <div class="form-floating">
           <input type="text" class="form-control mb-5" id="floatingInput" placeholder="Username" name="username">
           <label for="floatingInput">Username</label>
