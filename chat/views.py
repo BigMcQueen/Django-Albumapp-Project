@@ -16,11 +16,16 @@ def signup_func(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        try:
-            user = User.objects.create_user(username, '', password)
-            return redirect('listview')
-        except IntegrityError:
-            return render(request, 'chat/signup.html', {'context': 'このユーザー名はすでに登録されています！'})
+        if len(password) < 8:
+            return render(request, 'chat/signup.html', {'context': 'パスワードは８文字以上で入力してください'})
+        else:
+            try:
+                user = User.objects.create_user(username, '', password)
+                user = authenticate(request, username=username, password=password)
+                login(request, user)
+                return redirect('list')
+            except IntegrityError:
+                return render(request, 'chat/signup.html', {'context': 'このユーザー名はすでに登録されています'})
     else:
         return render(request, 'chat/signup.html')
     
@@ -37,12 +42,11 @@ def signin_func(request):
     else:
         return render(request, 'chat/signin.html')
 
-@login_required
+@login_required(login_url='/signin/')
 def listview_func(request):
     object_list = Chat.objects.all()
     return render(request, 'chat/listview.html', {'object_list': object_list})
 
-@login_required
 def signout_func(request):
     logout(request)
     return redirect('signin')
