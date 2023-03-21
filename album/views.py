@@ -29,3 +29,9 @@ class TagPhotoListView(ListView):
         tag_name = self.kwargs['tag']
         tag = get_object_or_404(Tag, name=tag_name)
         return super().get_queryset().filter(tags=tag)
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+
+        context['tag'] = self.kwargs['tag']
+        return context
