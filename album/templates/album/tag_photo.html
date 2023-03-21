@@ -1,0 +1,23 @@
+{% extends 'album/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    {% for photo in photos %}
+    <div class="col-6 col-md-4">
+      <div class="card">
+        <img src="{{ photo.image.url }}" class="card-img-top">
+        <div class="card-body">
+          <p class="card-text">
+            {% for tag in photo.tags.all %}
+            #{{ tag }}
+            {% endfor %}
+          </p>
+          <a href="{% url 'photo_detail' photo.pk %}" class="btn">詳細</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}
