@@ -11,4 +11,4 @@ class Photo(models.Model):
     image = models.ImageField(null=False, blank=False, upload_to='uploads/')
     description = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
