@@ -1,0 +1,32 @@
+{% extends 'album/base.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <p><a href="{% url 'photo_list' %}">« 戻る</a></p>
+      <div class="card">
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="md-3">
+              <label class="form-label">画像</label>
+              {{ form.image }}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">概要</label>
+              {{ form.description }}
+            </div>
+            <div class="mb-3">
+              <label class="form-label">タグ</label>
+              {{ form.tags }}
+            </div>
+            <div class="d-grid gap-2">
+              <input type="submit" value="登録">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
