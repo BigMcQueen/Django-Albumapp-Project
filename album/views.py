@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView, CreateView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 
 from .models import Photo, Tag
@@ -44,3 +44,15 @@ class PhotoCreateView(CreateView):
     template_name = 'album/photo_create.html'
     fields = '__all__'
     success_url = reverse_lazy('photo_list')
+
+    def form_valid(self, form):
+        photo = form.save()
+        new_tag = self.request.POST.get('new_tag')
+
+        if new_tag:
+            for tag in new_tag.split():
+                is_exists = Tag.objects.filter(name=tag)
+                if not is_exists:
+                    Tag.objects.create(name=tag)
+                    photo.tags.add(tag)
+        return redirect('photo_list')
