@@ -9,7 +9,7 @@
       <p class="pt-4 fs-5">
         {% for tag in tags %}
         <span class="badge rounded-pill bg-light">
-          <a href="{% url 'tag_photo_list' tag.name %}" class="text-dark text-decoration-none">{{ tag }}</a>
+          <a href="{% url 'tag_photo_list' tag.name %}" class="text-dark text-decoration-none">#{{ tag }}</a>
         </span>
         {% endfor %}
       </p>
