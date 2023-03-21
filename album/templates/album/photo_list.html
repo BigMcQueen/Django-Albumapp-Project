@@ -6,6 +6,9 @@
     <div class="col-lg-6 col-md-8 mx-auto">
       <h1 class="fw-light">Django Photos</h1>
       <p class="lead text-muted">Your memories come back to Life</p>
+      <p>
+        <a href="{% url 'photo_create' %}" class="btn btn-secondary my-2">写真を追加する</a>
+      </p>
       <p class="pt-4 fs-5">
         {% for tag in tags %}
         <span class="badge rounded-pill bg-light">
